@@ -1,6 +1,5 @@
 import React,{useEffect} from 'react'
 import { Link,useLocation } from 'react-router-dom'
-
 export default function Navbar() {
 let location = useLocation();
   useEffect(()=>{
@@ -29,6 +28,7 @@ let location = useLocation();
     </div>
   </div>
 </nav>
+
     </div>
   )
 }
