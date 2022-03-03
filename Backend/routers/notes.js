@@ -19,7 +19,7 @@ router.get('/fetchallnotes',fetchuser,
 })
 // Route2: Add all notes using:POST login required
 
-router.post('/addnote',fetchuser,
+router.post('/addnotes',fetchuser,
 [
     body('title',"Enter a valid title").isLength({min:3}),
     body('description',"description  must be at least 5 characters").isLength({ min: 5 })] 

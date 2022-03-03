@@ -25,6 +25,9 @@ let location = useLocation();
         
       </ul>
       
+      <Link className="btn btn-primary mx-1"  to="/login" role="button">Login</Link>
+      <Link className="btn btn-primary mx-1" to="/signup"  role="button" >Signup</Link>
+    
     </div>
   </div>
 </nav>
