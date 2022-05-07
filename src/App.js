@@ -11,7 +11,7 @@ import NoteState from "./context/notes/NoteState";
 
 
 function App() {
-  const [alert, setAlert] = useState("Null");
+  const [alert, setAlert] = useState(null);
 
   const showAlert = (meassage, type) => {
     setAlert({
@@ -42,10 +42,10 @@ function App() {
                 <About />
               </Route>
               <Route exact path="/login">
-                <Login/>
+                <Login showAlert={showAlert}/>
               </Route>
               <Route exact path="/signup">
-                <Signup/>
+                <Signup showAlert={showAlert}/>
               </Route>
             </Switch>
           </div>

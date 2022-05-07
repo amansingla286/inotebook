@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { useEffect,useRef,useState } from "react";
+import { useHistory } from "react-router-dom";
 import noteContext from "../context/notes/noteContext";
 import Addnote from "./Addnote";
 import Noteitem from "./Noteitem";
@@ -8,10 +9,15 @@ export default function Notes(props) {
   const context = useContext(noteContext);
   const { notes, getNote,editNote } = context;
   const[note,setNote] =useState({id:"",etitle:"",edescription:"",etag:"default"})
-
+let history =useHistory();
   useEffect(() => {
-    getNote();
-  }, []);
+    if(localStorage.getItem('token')){
+      getNote();
+    }
+    else{
+      history.push('/login')
+    }
+  },[]);
   const updateNote = (currentnote) => {
     ref.current.click();
     setNote({id:currentnote._id,etitle:currentnote.title,edescription:currentnote.description,etag:currentnote.tag})
@@ -27,6 +33,7 @@ export default function Notes(props) {
   const handleClick=(e)=>{
     editNote(note.id,note.etitle,note.edescription,note.etag);
     refclose.current.click()
+    props.showalert1("Updated Successfully","success");
   }
   const onChange=(e)=>{
       setNote({...note,[e.target.name]:e.target.value})
@@ -80,7 +87,7 @@ export default function Notes(props) {
             
           </div>
           <div className="mb-3">
-            <label for="description" className="form-label">
+            <label htmlFor="description" className="form-label">
             description
             </label>
             <input
@@ -94,7 +101,7 @@ export default function Notes(props) {
             />
           </div>  
           <div className="mb-3">
-            <label for="tag" className="form-label">
+            <label htmlFor="tag" className="form-label">
             tag
             </label>
             <input
@@ -134,7 +141,7 @@ export default function Notes(props) {
         </div>
         {notes.map((note) => {
           return (
-            <Noteitem key={note._id} updatenote={updateNote} note={note} />
+            <Noteitem key={note._id} updatenote={updateNote} note={note} showalert2={props.showalert1} />
           );
         })}
       </div>

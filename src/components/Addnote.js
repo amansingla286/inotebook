@@ -10,7 +10,7 @@ export default function Addnote(props) {
     const handleClick=(e)=>{
       e.preventDefault();
         addNote(note.title,note.description,note.tag)
-    props.showalert2("notes add successfully","success")
+    props.showalert2("Notes add successfully","success")
     setNote({title:"",description:"",tag:""})
     }
     const onChange=(e)=>{
@@ -40,7 +40,7 @@ export default function Addnote(props) {
             
           </div>
           <div className="mb-3">
-            <label for="description" className="form-label">
+            <label htmlFor="description" className="form-label">
             description
             </label>
             <input
@@ -55,7 +55,7 @@ export default function Addnote(props) {
             />
           </div>  
           <div className="mb-3">
-            <label for="tag" className="form-label">
+            <label htmlFor="tag" className="form-label">
             tag
             </label>
             <input

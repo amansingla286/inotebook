@@ -15,17 +15,18 @@ router.post('/createuser',[
  body('name',"Enter a valid Name").isLength({ min: 3 }),
  body('password',"password must be at least 5 characters").isLength({ min: 5 })]    
 ,async(req,res)=>{
+  let success=false;
   // if there are errors,return bad request and the error
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() })
+      return res.status(400).json({success, errors: errors.array() })
     }
     try {
       
     // check whether the email is already exitts or not
     let user = await   User.findOne({email:req.body.email})
     if(user){
-            return res.status(400).json({error:"please try to login with correct credentials" })
+            return res.status(400).json({success,error:"please try to login with correct credentials" })
     }
 
     const salt =await bcrypt.genSalt(10);
@@ -41,7 +42,8 @@ router.post('/createuser',[
       user:{id:user.id}
       }
       const authtoken = jwt.sign(data,JWT_SECRET)
-      res.json({authtoken})
+      success= true;
+      res.json({success,authtoken})
       // .then(user => res.json(user))
       // catch error
     } catch (error) {
